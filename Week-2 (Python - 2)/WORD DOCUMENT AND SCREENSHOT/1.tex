@@ -1,0 +1,355 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\geometry{margin=1in}
+
+% Define custom colors for code blocks
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\title{\textbf{My DataraFlow Cohort 2 Journey: Mastering Advanced Python (Week 2 Take-Home Exercises)}}
+\author{Raji Faruq Ishola}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\noindent Hello, my wonderful network and fellow tech explorers! 🤗 
+
+\vspace{0.3cm}
+\noindent As part of my incredible learning adventure in the DataraFlow Cohort 2 program, I am thrilled to share my complete walkthrough, practical code solutions, and deep insights from our Week 2 Take-Home assignments[cite: 3]. This journey has not only sharpened my engineering skills but has also taught me how to write cleaner, more reusable, and production-ready code. My goal in sharing this comprehensive breakdown is to help anyone navigating object-oriented programming, iterators, polymorphism, and scope to gain valuable clarity and hands-on guidance! 🗺️✨
+
+\section*{Course 1: Object-Oriented Programming (OOP) 🍪}
+Object-Oriented Programming is like designing blueprints for a manufacturing factory. A \textbf{Class} serves as our master template or cookie cutter, while an \textbf{Object} represents the individual products we bake and customize from that blueprint.
+
+\subsection*{Task 1: Constructor and String Formatting}
+\textbf{Task:} Insert the missing parts to make the code return \texttt{John (36)} using a constructor and string formatting[cite: 3].
+
+\begin{lstlisting}[language=Python]
+class Person:
+    # This initializes our object with unique attributes when instantiated
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    # This defines how our object is represented as a text string
+    def __str__(self):
+        return f"{self.name} ({self.age})"
+
+# Instantiate our object with custom data
+p1 = Person("John", 36)
+
+# Print the object instance, triggering our __str__ method automatically
+print(p1)
+\end{lstlisting}
+
+\noindent\textbf{Detailed Explanation and Commentary:}
+\textbf{This demonstrates how we define} initialization logic using the \texttt{\_\_init\_\_} constructor and format object outputs using the special \texttt{\_\_str\_\_} method[cite: 1]. When we pass \texttt{"John"} and \texttt{36} into \texttt{Person("John", 36)}, Python binds those values to our object instance via \texttt{self}, allowing our f-string to return \texttt{John (36)} cleanly when printed[cite: 1].
+
+\begin{center}
+\fbox{\textit{[ INSERT SCREENSHOT OF COURSE 1 CODE & OUTPUT HERE ]}}
+\end{center}
+
+\subsection*{Task 2: Classes, Objects, and Properties}
+\textbf{Task:} Create a class named \texttt{MyClass}, instantiate an object called \texttt{p1}, and use it to print the value of \texttt{x}[cite: 3].
+
+\begin{lstlisting}[language=Python]
+class MyClass:
+    # Define a class property
+    x = 5
+
+# Instantiate our object
+p1 = MyClass()
+
+# Access and print the property using our object instance
+print(p1.x)
+\end{lstlisting}
+
+\noindent\textbf{Detailed Explanation and Commentary:}
+\textbf{This illustrates how an object} accesses variables stored inside its parent class blueprint[cite: 1]. By writing \texttt{p1 = MyClass()}, we bring the template to life, and \texttt{p1.x} reaches inside to fetch the stored value \texttt{5}[cite: 1].
+
+\section*{Course 2: Inheritance 🧬✨}
+Inheritance allows us to pass down traits from a parent class to a child class, keeping our codebase DRY (Don't Repeat Yourself)[cite: 2]. Think of it like a family recipe book where children inherit master recipes and add their own signature twists.
+
+\subsection*{Task 1: Animal Subclass Sound Overriding}
+\textbf{Task:} Create a base class \texttt{Animal} with attributes \texttt{name} and \texttt{sound}, and a method \texttt{make_sound()}. Create subclasses \texttt{Dog} and \texttt{Cat} that override \texttt{make_sound()} to print \texttt{"Woof!"} and \texttt{"Meow!"}[cite: 3].
+
+\begin{lstlisting}[language=Python]
+class Animal:
+    # This sets up our base animal attributes
+    def __init__(self, name, sound):
+        self.name = name
+        self.sound = sound
+
+    def make_sound(self):
+        print(self.sound)
+
+class Dog(Animal):
+    def __init__(self, name):
+        # This uses super() to inherit initialization from the parent Animal class
+        super().__init__(name, "Woof!")
+
+# Instantiate and test our subclass
+dog = Dog("Bingo")
+dog.make_sound() # Output: Woof!
+\end{lstlisting}
+
+\noindent\textbf{Detailed Explanation and Commentary:}
+\textbf{This illustrates how \texttt{super().\_\_init\_\_()}} bridges our child class to the parent class, letting us inherit base setup logic without rewriting code[cite: 2]. By extending \texttt{Animal}, our \texttt{Dog} class gains all parent capabilities while tailoring its own unique sound behavior[cite: 2].
+
+\subsection*{Task 2: Vehicle Hierarchy and Method Overriding}
+\textbf{Task:} Create a base class \texttt{Vehicle} with attributes \texttt{brand} and \texttt{model}, and a method \texttt{display_info()}. Create a subclass \texttt{Car} that adds \texttt{doors} and overrides \texttt{display_info()}[cite: 3].
+
+\begin{lstlisting}[language=Python]
+class Vehicle:
+    def __init__(self, brand, model):
+        self.brand = brand
+        self.model = model
+
+    def display_info(self):
+        print(f"Vehicle: {self.brand} {self.model}")
+
+class Car(Vehicle):
+    def __init__(self, brand, model, doors):
+        super().__init__(brand, model)
+        self.doors = doors
+
+    def display_info(self):
+        print(f"Car: {self.brand} {self.model}, Doors: {self.doors}")
+
+# --- Execution ---
+my_car = Car("Toyota", "Camry", 4)
+my_car.display_info()
+\end{lstlisting}
+
+\noindent\textbf{Detailed Explanation and Commentary:}
+\textbf{This demonstrates method overriding} in inheritance, where a child class modifies an inherited method to present specialized information unique to its type[cite: 2].
+
+\section*{Course 3: Iterators 🌀✨}
+An iterator acts like a bookmark in a massive book, allowing us to traverse through elements sequentially one item at a time without loading an entire collection into computer memory all at once.
+
+\subsection*{Task 1: Custom CountDown Iterator}
+\textbf{Task:} Create a custom iterator class \texttt{CountDown} that takes a number \texttt{n} and counts down to 1 using \texttt{\_\_iter\_\_()} and \texttt{\_\_next\_\_()}[cite: 3].
+
+\begin{lstlisting}[language=Python]
+class CountDown:
+    def __init__(self, n):
+        self.n = n
+
+    def __iter__(self):
+        # This returns the iterator object itself to initiate the protocol
+        return self
+
+    def __next__(self):
+        # This yields the next sequential value or stops the iteration
+        if self.n > 0:
+            val = self.n
+            self.n -= 1
+            return val
+        else:
+            raise StopIteration
+
+# --- Execution ---
+for num in CountDown(3):
+    print(num)
+\end{lstlisting}
+
+\noindent\textbf{Detailed Explanation and Commentary:}
+\textbf{This demonstrates how custom iterators} maintain internal state across loop cycles[cite: 3]. Every time the \texttt{for} loop requests an item, \texttt{\_\_next\_\_()} executes, decrementing our counter until it hits zero and raises \texttt{StopIteration} to exit cleanly[cite: 3].
+
+\subsection*{Task 2: List Iterator with Exception Handling}
+\textbf{Task:} Take a list of numbers \texttt{[10, 20, 30, 40, 50]}, convert it into an iterator using \texttt{iter()}, and retrieve each element using \texttt{next()} while handling \texttt{StopIteration} gracefully[cite: 3].
+
+\begin{lstlisting}[language=Python]
+numbers = [10, 20, 30, 40, 50]
+my_iter = iter(numbers)
+
+while True:
+    try:
+        # Retrieve items sequentially one by one
+        print(next(my_iter))
+    except StopIteration:
+        print("Reached the end of the iterator safely!")
+        break
+\end{lstlisting}
+
+\noindent\textbf{Detailed Explanation and Commentary:}
+\textbf{This illustrates how we process} sequences element-by-element using explicit \texttt{next()} calls and catch the \texttt{StopIteration} exception to terminate our loop without crashing[cite: 3].
+
+\section*{Course 4: Polymorphism 🎭✨}
+Polymorphism means "many forms". It allows different classes to share identical method names while executing completely customized behaviors behind the scenes.
+
+\subsection*{Task 1: Bird Language and Consumer Function}
+\textbf{Task:} Create a base class \texttt{Bird} with \texttt{speak()}, subclasses \texttt{Parrot} and \texttt{Crow} that override it, and a function \texttt{make_bird_speak()} that accepts any bird object[cite: 3].
+
+\begin{lstlisting}[language=Python]
+class Bird:
+    def speak(self):
+        return "Chirp"
+
+class Parrot(Bird):
+    def speak(self):
+        return "Squawk"
+
+def make_bird_speak(bird_obj):
+    # This polymorphically invokes .speak() without checking the object's specific class type
+    print(bird_obj.speak())
+
+# --- Execution ---
+make_bird_speak(Parrot()) # Output: Squawk
+\end{lstlisting}
+
+\noindent\textbf{Detailed Explanation and Commentary:}
+\textbf{This highlights duck typing}, where our consumer function relies entirely on the presence of the \texttt{.speak()} method rather than checking object classes explicitly[cite: 3]. Polymorphism lets us write flexible, modular code that handles new subclasses effortlessly[cite: 3].
+
+\subsection*{Task 2: Polymorphic Vehicle Movement}
+\textbf{Task:} Create two classes \texttt{Car} and \texttt{Bicycle} with a \texttt{move()} method, store them in a list, and loop through them calling \texttt{move()}[cite: 3].
+
+\begin{lstlisting}[language=Python]
+class Car:
+    def move(self):
+        return "Car drives"
+
+class Bicycle:
+    def move(self):
+        return "Bicycle pedals"
+
+# --- Execution ---
+vehicles = [Car(), Bicycle()]
+for v in vehicles:
+    print(v.move())
+\end{lstlisting}
+
+\noindent\textbf{Detailed Explanation and Commentary:}
+\textbf{This demonstrates polymorphic iteration}, allowing us to call identical method names across completely different classes without verifying their specific types beforehand[cite: 3].
+
+\section*{Course 5: Variable Scope 🗺️✨}
+Scope dictates where variables live and can be accessed within our code, functioning much like personal drawers versus shared household tables.
+
+\subsection*{Task 1: Modifying Global State}
+\textbf{Task:} Create a global variable \texttt{total = 0}, and inside a function \texttt{add_to_total(n)}, use the \texttt{global} keyword to modify it across multiple calls[cite: 3].
+
+\begin{lstlisting}[language=Python]
+# Initialize our global total tracker
+total = 0
+
+def add_to_total(n):
+    # This declares that we want to modify the global 'total' variable directly
+    global total
+    total += n
+    print("Updated global total:", total)
+
+# --- Execution ---
+add_to_total(5)
+add_to_total(10)
+\end{lstlisting}
+
+\noindent\textbf{Detailed Explanation and Commentary:}
+\textbf{This demonstrates how state persistence} is achieved using the \texttt{global} keyword[cite: 3]. Ordinarily, variables created inside functions are temporary; adding \texttt{global total} instructs Python to link our function directly to the module-level variable to accumulate running sums[cite: 3].
+
+\subsection*{Task 2: Nonlocal Keyword in Nested Functions}
+\textbf{Task:} Create a function \texttt{outer()} with a variable \texttt{message = "Hi"}, and inside it, create a nested function \texttt{inner()} that modifies \texttt{message} using the \texttt{nonlocal} keyword[cite: 3].
+
+\begin{lstlisting}[language=Python]
+def outer():
+    message = "Hi"
+    
+    def inner():
+        # This modifies the enclosing variable from the parent scope
+        nonlocal message
+        message = "Hello from inner scope!"
+        
+    inner()
+    print("Updated outer message:", message)
+
+# --- Execution ---
+outer()
+\end{lstlisting}
+
+\noindent\textbf{Detailed Explanation and Commentary:}
+\textbf{This illustrates how the \texttt{nonlocal} keyword} enables nested inner functions to mutate variables residing in their parent enclosing function without elevating them to global status[cite: 3].
+
+\section*{Assignment \& Assessment Highlights 🚀📚}
+
+\subsection*{Task 1: Instance Tracking with Class Variables}
+\textbf{Task:} Create a \texttt{Counter} class with a class variable to track total instances created, and print the count after making several objects[cite: 3].
+
+\begin{lstlisting}[language=Python]
+class Counter:
+    # Class-level variable shared across all instances
+    total_instances = 0
+    
+    def __init__(self):
+        Counter.total_instances += 1
+
+# --- Execution ---
+obj1 = Counter()
+obj2 = Counter()
+obj3 = Counter()
+print("Total instances created:", Counter.total_instances)
+\end{lstlisting}
+
+\noindent\textbf{Detailed Explanation and Commentary:}
+\textbf{This highlights class-level variables}, which maintain a shared state across all generated instances to track cumulative counts rather than resetting per object[cite: 3].
+
+\subsection*{Task 2: Polymorphic Shape Area Aggregation}
+\textbf{Task:} Create classes \texttt{Rectangle}, \texttt{Circle}, and \texttt{Triangle} with an \texttt{area()} method, store instances in a list, and calculate total area without checking types[cite: 3].
+
+\begin{lstlisting}[language=Python]
+import math
+
+class Rectangle:
+    def __init__(self, w, h):
+        self.w, self.h = w, h
+    def area(self):
+        return self.w * self.h
+
+class Circle:
+    def __init__(self, r):
+        self.r = r
+    def area(self):
+        return math.pi * (self.r ** 2)
+
+# Store mixed shape instances in a single collection
+shapes = [Rectangle(3, 4), Circle(2)]
+
+# Polymorphically sum up areas without checking individual object types
+total_area = sum(shape.area() for shape in shapes)
+print(f"Calculated Total Area: {total_area:.2f}")
+\end{lstlisting}
+
+\noindent\textbf{Detailed Explanation and Commentary:}
+\textbf{This illustrates polymorphic aggregation}, enabling uniform processing of diverse object structures[cite: 3]. Because every shape implements its own \texttt{.area()} method under a shared interface, our summation loop evaluates items seamlessly without conditional type checks[cite: 3].
+
+\vspace{0.5cm}
+\noindent What an incredible week of growth and discovery at DataraFlow! 🤗 I hope this deep dive into our exercises helps illuminate these core Python concepts for your own coding journey. Let me know which topic you would like us to explore next! ❤️✨
+
+\end{document}
